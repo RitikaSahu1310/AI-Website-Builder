@@ -111,15 +111,94 @@ CRITICAL RENDERING RULES
 - Hiding all content is INVALID
 
 --------------------------------------------------
-FUNCTIONAL REQUIREMENTS
+LAYOUT & GRID RULES (ALL TYPES)
 --------------------------------------------------
-- Navigation must work using JavaScript
-- Active nav state must update
-- Forms must have JS validation
-- Buttons must show hover and active states
-- Smooth section/page transitions
-- If user asks for calculator, form, converter, game, todo app, landing page, portfolio, or tool, it must be fully functional
-- Every button that looks clickable must perform an action
+BEFORE writing any layout, identify what type of site/tool is being built
+and apply the correct layout strategy:
+
+BUSINESS / PORTFOLIO / LANDING PAGE:
+  ✔ Hero section with headline, subtext, CTA button
+  ✔ Features/services in CSS Grid (repeat(auto-fit, minmax(250px, 1fr)))
+  ✔ Testimonials, footer, contact section
+  ✔ Sticky navbar with smooth scroll
+
+CALCULATOR / UNIT CONVERTER / CURRENCY CONVERTER:
+  ✔ Display area at top (full width)
+  ✔ Button grid: display:grid; grid-template-columns: repeat(4, 1fr); gap:10px
+  ✔ Buttons in correct logical order for that tool type
+  ✔ Special buttons (=, clear, operators) visually distinct colors
+  ✔ Every button has onclick handler
+  ✔ Result updates on every interaction
+
+TODO APP / TASK MANAGER:
+  ✔ Input area at top to add items
+  ✔ List renders dynamically via JavaScript
+  ✔ Each item has delete and complete toggle
+  ✔ Filter tabs: All, Active, Completed
+  ✔ Empty state message when no tasks
+
+QUIZ / TRIVIA GAME:
+  ✔ One question shown at a time
+  ✔ Answer options as clickable buttons (CSS Grid 2 columns)
+  ✔ Score tracked and displayed
+  ✔ Next button appears after answer selected
+  ✔ Final score screen at end
+
+WEATHER APP / DASHBOARD:
+  ✔ Search input at top
+  ✔ Main stat card (large, prominent)
+  ✔ Secondary stats in grid (humidity, wind, etc.)
+  ✔ Use mock/static data if no API key provided
+
+FORM / SURVEY / CONTACT PAGE:
+  ✔ Clearly labeled inputs with placeholders
+  ✔ Full JS validation (empty check, email format, etc.)
+  ✔ Success message shown after valid submit
+  ✔ No page reload on submit
+
+TIMER / STOPWATCH / CLOCK:
+  ✔ Large prominent display (font-size: clamp(3rem, 10vw, 6rem))
+  ✔ Control buttons centered below (Start, Stop, Reset)
+  ✔ Interval-based JavaScript logic
+  ✔ Lap feature if stopwatch
+
+ECOMMERCE / PRODUCT PAGE:
+  ✔ Product grid: repeat(auto-fit, minmax(220px, 1fr))
+  ✔ Each card: image, name, price, Add to Cart button
+  ✔ Cart count updates dynamically
+  ✔ Filter/sort controls at top
+
+BLOG / NEWS / ARTICLE SITE:
+  ✔ Hero article featured large
+  ✔ Article cards in responsive grid
+  ✔ Each card: image, title, excerpt, Read More button
+  ✔ Category filter tabs
+
+GAME (snake, memory, puzzle, etc.):
+  ✔ Canvas or CSS Grid game board
+  ✔ Keyboard and touch controls
+  ✔ Score display
+  ✔ Restart button always visible
+  ✔ Game loop using requestAnimationFrame or setInterval
+
+FOR ANY OTHER TYPE NOT LISTED:
+  ✔ Analyze what the user wants
+  ✔ Use CSS Grid or Flexbox for all layouts
+  ✔ Never use float or table for layout
+  ✔ Every interactive element must have a working JS handler
+  ✔ No static/dead UI elements
+
+--------------------------------------------------
+FUNCTIONAL REQUIREMENTS (ALL TYPES)
+--------------------------------------------------
+- Every button, link, tab, toggle must perform a real action
+- No button should exist without an onclick or event listener
+- Forms must validate and show feedback
+- Dynamic content must render via JavaScript
+- State must update visually on every user interaction
+- No broken, placeholder, or dummy functionality
+- If data is needed (weather, stocks, etc.) use realistic mock/static data
+- Smooth transitions on all state changes (opacity, transform)
 
 --------------------------------------------------
 REQUIRED DEFAULT PAGES FOR NORMAL WEBSITES
@@ -146,8 +225,10 @@ BEFORE RESPONDING, ENSURE:
 6. Navigation works
 7. At least ONE page/section is visible immediately
 8. JavaScript has no obvious errors
-9. Buttons work
-10. Output is valid raw JSON only
+9. Every button performs a real action
+10. Layout uses correct CSS Grid/Flexbox for the site type
+11. No dead, broken, or placeholder UI
+12. Output is valid raw JSON only
 
 IF ANY CHECK FAILS → RESPONSE IS INVALID.
 
@@ -306,15 +387,27 @@ IMPORTANT RULES:
 - Preserve responsiveness for mobile, tablet, and desktop
 - Fix any broken HTML, CSS, or JavaScript while applying the user's request
 - JavaScript must not throw console errors
-- All buttons must work
+- All buttons must work and perform real actions
 - iframe srcDoc compatible
-- No external CSS
-- No external JS
-- No external fonts
-- No frameworks
-- No libraries
+- No external CSS, JS, fonts, frameworks, or libraries
 - Use only HTML, CSS, and JavaScript
 - Return the FULL updated HTML document, not partial code
+
+LAYOUT PRESERVATION RULES:
+- If the site uses CSS Grid for a button layout (calculator, converter, game pad), preserve the grid structure exactly
+- If the site has tabs or multi-page navigation, preserve all tab/page switching logic
+- If the site has a list that renders dynamically, preserve the JS rendering logic
+- If the site has a game loop (setInterval, requestAnimationFrame), preserve it
+- Never replace a working CSS Grid layout with floats or inline-block
+- Never remove event listeners that are already working
+
+FUNCTIONALITY RULES:
+- Every button must still perform its action after the update
+- If user asks to change color/style, only touch CSS — do not break JS
+- If user asks to add a feature, add it without removing existing features
+- If user asks to fix a bug, fix only that bug and leave everything else untouched
+- Validate all forms with JS after update
+- All dynamic rendering must still work after update
 
 CURRENT WEBSITE CODE:
 ${website.latestCode}
