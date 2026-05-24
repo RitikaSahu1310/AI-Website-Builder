@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { serverUrl } from '../App'
 import axios from 'axios'
@@ -13,7 +13,6 @@ function WebsiteEditor() {
     const [code, setCode] = useState("")
     const [messages, setMessages] = useState([])
     const [prompt, setPrompt] = useState("")
-    const iframeRef = useRef(null)
     const [updateLoading, setUpdateLoading] = useState(false)
     const [thinkingIndex, setThinkingIndex] = useState(0)
     const [showCode, setShowCode] = useState(false)
@@ -107,17 +106,6 @@ function WebsiteEditor() {
 
         handleGetWebsite()
     }, [id])
-
-    useEffect(() => {
-        if (!iframeRef.current || !code) return
-
-        const blob = new Blob([code], { type: "text/html" })
-        const url = URL.createObjectURL(blob)
-
-        iframeRef.current.src = url
-
-        return () => URL.revokeObjectURL(url)
-    }, [code])
 
     if (error) {
         return (
@@ -240,9 +228,9 @@ function WebsiteEditor() {
                 </div>
 
                 <iframe
-                    ref={iframeRef}
                     title="Live Preview"
-                    sandbox='allow-scripts allow-forms'
+                    srcDoc={code}
+                    sandbox="allow-scripts allow-same-origin allow-forms"
                     className='flex-1 w-full bg-white border-none'
                 />
 
@@ -346,7 +334,7 @@ function WebsiteEditor() {
                             title="Full Preview"
                             className='w-full h-full bg-white border-none'
                             srcDoc={code}
-                            sandbox='allow-scripts allow-forms'
+                            sandbox="allow-scripts allow-same-origin allow-forms"
                         />
 
                         <button
