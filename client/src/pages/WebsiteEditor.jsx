@@ -228,6 +228,7 @@ function WebsiteEditor() {
                 </div>
 
                 <iframe
+                    key={code}
                     title="Live Preview"
                     srcDoc={code}
                     sandbox="allow-scripts allow-same-origin allow-forms"
@@ -331,6 +332,7 @@ function WebsiteEditor() {
                 {showFullPreview && (
                     <motion.div className='fixed inset-0 z-[9999] bg-black'>
                         <iframe
+                            key={code}
                             title="Full Preview"
                             className='w-full h-full bg-white border-none'
                             srcDoc={code}
