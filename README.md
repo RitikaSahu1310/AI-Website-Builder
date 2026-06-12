@@ -2,9 +2,6 @@
 🚀 AI Website Builder — MERN Stack AI Website Generator
 A full-stack AI-powered website builder built using the MERN stack. This project allows users to generate modern, responsive, and professional websites by simply entering a text prompt. The application uses AI to convert user requirements into complete website code, including HTML, CSS, and JavaScript. Users can create an account, generate websites, preview them, edit the generated code, manage projects from the dashboard, and deploy websites with unique live URLs.
 
-🌐 Live Demo
-🔗 View Project
-
 ✨ Features
 🤖 AI-based website generation from user prompts
 🔐 User authentication with protected routes
