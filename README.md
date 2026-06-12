@@ -118,10 +118,6 @@ npm run dev
 4. Generated content and website structure are returned.
 5. User can review and customize the generated result.
 
-## 📸 Screenshots
-
-Add project screenshots here.
-
 ## 🔮 Future Enhancements
 
 * Drag-and-drop website editor
